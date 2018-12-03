@@ -1,0 +1,39 @@
+class Solution {
+public:
+    bool isequal(string s1,string s2){
+        int S1[26], S2[26];
+		memset(S1, 0, sizeof(S1));
+		memset(S2, 0, sizeof(S2));
+		for (int i = 0; i < s1.size(); i++)
+		{
+			S1[(s1[i] - 97)]++;
+			S2[(s2[i] - 97)]++;
+		}
+		for (int i = 0; i <26; i++)
+		{
+			if (S1[i] != S2[i])
+				return false;
+		}
+		return true;
+    }
+    
+    bool checkInclusion(string s1, string s2) {
+        int n1=s1.size();
+        int n2=s2.size();
+        if(n1>n2) return false;
+        unordered_map<char,int> map;
+        for(int i=0;i<n1;i++)
+            map[s1[i]]++;
+        int j=0;
+        string s="";
+        for(j=0;j<=n2-n1;j++){
+            if(map[s2[j]]>=1){
+                s=s2.substr(j,n1);
+                if(isequal(s1,s))
+                    return true;
+                s="";
+            }       
+        }
+        return false;
+    }
+};
