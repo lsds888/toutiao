@@ -1,0 +1,39 @@
+class Solution {
+public:
+    void reverseWords(string &s) {
+        reverseWords1(s);
+        int i=0;
+        int s1=0;
+        int e=0;
+        string str="";
+        while(i<s.size()){
+            while(i<s.size()&&s[i]==' '){
+                i++;
+                s1=e=i;
+            }
+            if(i==s.size())
+                break;
+            while(i<s.size()&&s[i]!=' '){
+                i++;
+                e++;
+            }
+            string temp=s.substr(s1,e-s1);
+            reverseWords1(temp);
+            str+=temp;
+            str+=" ";
+        }
+        s=str.substr(0,str.size()-1);
+    }
+    void reverseWords1(string &s) {
+        int st=0;
+        int e=s.size()-1;
+        while(st<e){
+            swap(s[st],s[e]);
+            st++;
+            e--;
+        }
+    }
+    
+};
+
+
