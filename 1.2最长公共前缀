@@ -8,7 +8,7 @@ public:
         for(int i=0;i<strs[0].length();i++){
             for(int j=1;j<n;j++){
                 if(i>=strs[j].length()||strs[0][i]!=strs[j][i]){
-                    return strs[0].substr(0,i);
+                    return strs[0].substr(0,i);/*substr是C++语言函数，主要功能是复制子字符串，要求从指定位置开始，并具有指定的长度。如果没有指定长度_Count或_Count+_Off超出了源字符串的长度，则子字符串将延续到源字符串的结尾。*/
                 }
             }
         }
