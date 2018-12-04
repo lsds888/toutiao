@@ -1,0 +1,33 @@
+class Solution {
+public:
+    unordered_set<int> set;
+    enum orderby{
+        add,
+        dec
+    };
+    int find(orderby ord,int val){
+        int maxl=0;
+        while(set.find(val)!=set.end()){
+            ++maxl;
+            set.erase(val);
+            if(ord==add)
+                ++val;
+            else
+                --val;
+        }
+        return maxl;
+    }
+    int longestConsecutive(vector<int>& nums) {
+        for(int i=0;i<nums.size();i++){
+            set.insert(nums[i]);
+        }
+        int maxl=0;
+        for(int i=0;i<nums.size();i++){
+            int addmax=find(add,nums[i]);
+            int decmax=find(dec,nums[i]-1);
+            if(addmax+decmax>maxl)
+                maxl=addmax+decmax;
+        }
+        return maxl;
+    }
+};
