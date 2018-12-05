@@ -1,0 +1,35 @@
+
+class Solution {
+public:
+    int find(int x, vector<int>& pre)
+    {
+        return pre[x]==x ? x : pre[x] = find(pre[x], pre);
+    }
+
+    int findCircleNum(vector<vector<int>>& M) {
+        if (M.empty())
+            return 0;
+        vector<int> pre(M.size());
+        for(int i=0; i<M.size(); i++)
+            pre[i] = i;//先各自为组，组名也为自己的序号
+        int group = M.size();//一开始有多少人就有多少个朋友圈，当每出现一对朋友时就减1，最后就是总的朋友圈数量了。
+        for(int i=0; i<M.size(); i++)
+        {
+            for(int j=0; j<M.size(); j++)
+            {
+                if (i != j && M[i][j] == 1)
+                {
+                    int x1 = find(i, pre);//x1为i所属的组
+                    int x2 = find(j, pre);//x2为j所属的组
+                    if (x1 != x2)
+                    {
+                        //如果不属于同个朋友圈的话就把i归为j的组
+                        pre[x1] = x2;
+                        group--;
+                    }
+                }
+            }
+        }
+        return group;
+    }
+};
