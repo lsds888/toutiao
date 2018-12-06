@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int trap(vector<int>& height) {
+        int n=height.size();
+        if(n<=1) return 0;
+        int maxid=0;
+        int max=-1;
+        for(int i=0;i<n;i++){
+            if(height[i]>max){
+                max=height[i];
+                maxid=i;
+            }
+        }
+        int res=0;
+        int l=height[0];
+        for(int i=1;i<maxid;i++){
+            if(l<height[i]){
+                l=height[i];
+            }else{
+                res+=(l-height[i]);
+            }
+        }
+        int r=height[n-1];
+        for(int i=n-1;i>maxid;i--){
+            if(r<height[i]){
+                r=height[i];
+            }else{
+                res+=(r-height[i]);
+            }
+        }
+        return res;
+    }
+};
